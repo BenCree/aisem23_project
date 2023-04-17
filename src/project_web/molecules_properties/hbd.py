@@ -25,6 +25,15 @@ def get_data(raw_data: list) -> dict:
                 - max_value (float): maximum value
     """
     
+    hbd_values = [int(d["molecule_properties"]["hbd"]) for d in raw_data if d["molecule_properties"]["hbd"]]
+    return dict(component="Hbond donors",
+                data=hbd_values,
+                mean=np.mean(hbd_values),
+                std=np.std(hbd_values),
+                max_value=np.max(hbd_values),
+                min_value=np.min(hbd_values)
+                ) 
+
     return {}
     
 def draw_component(data_array: list) -> dcc.Graph:
